@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bulk_n_burn/constants.dart';
+import 'package:bulk_n_burn/screens/NewAccountScreen/sign_up_form_widget.dart';
 
 class NewAccountScreen extends StatelessWidget {
   const NewAccountScreen({super.key});
@@ -25,7 +26,11 @@ class NewAccountScreen extends StatelessWidget {
           Text(
             'Sign Up',
             style: kHeadlineTextStyle.copyWith(fontSize: 35),
-          )
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          SignUpWidget(),
         ],
       ),
     );
