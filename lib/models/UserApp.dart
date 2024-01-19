@@ -1,18 +1,18 @@
-class User {
+class UserApp {
   String full_name;
   String email;
   String sex;
-  int height;
-  int age;
-  DateTime birthday;
+  String height;
+  String age;
+  //DateTime birthday;
   //int gained_calories;
 
-  User({
+  UserApp({
     required this.sex,
     required this.height,
-    this.email = "",
+    required this.email,
     required this.full_name,
     required this.age,
-    required this.birthday,
+    //required this.birthday,
   });
 }

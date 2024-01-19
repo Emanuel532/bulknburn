@@ -1,4 +1,9 @@
+import 'package:bulk_n_burn/screens/FirstLoginScreen/first_login_screen.dart';
+import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:bulk_n_burn/providers/auth_provider.dart';
+import 'package:bulk_n_burn/providers/firebase_providers.dart';
 
 final consInputDec = InputDecoration(
     hintText: "Email",
@@ -9,109 +14,62 @@ final consInputDec = InputDecoration(
     filled: true,
     prefixIcon: const Icon(Icons.person));
 
-class SignUpWidget extends StatefulWidget {
+class SignUpWidget extends ConsumerStatefulWidget {
   const SignUpWidget({super.key});
 
   @override
-  State<SignUpWidget> createState() => _SignUpWidgetState();
+  ConsumerState<SignUpWidget> createState() => _SignUpWidgetState();
 }
 
-class _SignUpWidgetState extends State<SignUpWidget> {
+class _SignUpWidgetState extends ConsumerState<SignUpWidget> {
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
+          style: TextStyle(color: Colors.white),
+          onChanged: (val) {
+            email = val;
+          },
           decoration: consInputDec,
         ),
         const SizedBox(height: 10),
         TextField(
-          decoration: consInputDec.copyWith(hintText: 'Password'),
+          style: TextStyle(color: Colors.white),
+          onChanged: (val) {
+            password = val;
+          },
+          decoration: consInputDec.copyWith(
+            hintText: 'Password',
+            prefixIcon: Icon(Icons.lock),
+          ),
           obscureText: true,
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            await ref
+                .read(authNotifierProvider.notifier)
+                .signup(email: email, password: password);
+            print(ref.read(firebaseAuthProvider).currentUser);
+            if (ref.read(firebaseAuthProvider).currentUser != null) {
+              Navigator.pushReplacementNamed(context, FirstLoginScreen.id);
+            }
+          },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
             backgroundColor: Colors.purple,
           ),
           child: const Text(
-            "Create Account",
+            "Sign up",
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         )
-      ],
-    );
-  }
-
-  _inputField(context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        TextField(
-          decoration: InputDecoration(
-              hintText: "Name",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none),
-              fillColor: Colors.purple.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.person)),
-        ),
-        const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Password",
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none),
-            fillColor: Colors.purple.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.password),
-          ),
-          obscureText: true,
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: Colors.purple,
-          ),
-          child: const Text(
-            "Login",
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-        )
-      ],
-    );
-  }
-
-  _forgotPassword(context) {
-    return TextButton(
-      onPressed: () {},
-      child: const Text(
-        "Forgot password?",
-        style: TextStyle(color: Colors.purple),
-      ),
-    );
-  }
-
-  _signup(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("Dont have an account? "),
-        TextButton(
-            onPressed: () {},
-            child: const Text(
-              "Sign Up",
-              style: TextStyle(color: Colors.purple),
-            ))
       ],
     );
   }

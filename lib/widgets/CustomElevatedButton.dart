@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 
-class PurpleElevatedButton extends StatelessWidget {
-  const PurpleElevatedButton({
+class CustomElevatedButton extends StatelessWidget {
+  final String text;
+  final Color color;
+  final Function onPress;
+
+  const CustomElevatedButton({
     super.key,
+    this.text = "",
+    this.color = Colors.white,
+    required this.onPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        onPress();
+      },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),
-        backgroundColor: Colors.purple,
+        backgroundColor: color,
       ),
-      child: const Text(
-        "Login",
-        style: TextStyle(fontSize: 20, color: Colors.white),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 25, color: Colors.white),
       ),
     );
   }
