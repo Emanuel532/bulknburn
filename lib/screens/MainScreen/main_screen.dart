@@ -1,3 +1,4 @@
+import 'package:bulk_n_burn/screens/FoodDictionaryScreen/food_dictionary_screen.dart';
 import 'package:bulk_n_burn/screens/MainScreen/add_activity_calories_widget.dart';
 import 'package:bulk_n_burn/widgets/RoundIconButtonWidget.dart';
 import 'package:bulk_n_burn/widgets/app_drawer_widget.dart';
@@ -63,7 +64,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       icon: Icons.local_fire_department,
                       iconColor: Colors.red),
                   RoundIconButtonWidget(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, FoodDictionaryScreen.id);
+                      },
                       icon: Icons.fastfood,
                       iconColor: Colors.orangeAccent),
                 ],

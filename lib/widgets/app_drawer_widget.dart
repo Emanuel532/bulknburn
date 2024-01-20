@@ -1,5 +1,6 @@
 import 'package:bulk_n_burn/providers/auth_provider.dart';
 import 'package:bulk_n_burn/providers/firebase_providers.dart';
+import 'package:bulk_n_burn/screens/FoodDictionaryScreen/food_dictionary_screen.dart';
 import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
 import 'package:bulk_n_burn/screens/UserProfileScreen/user_profile_screen.dart';
 import 'package:bulk_n_burn/screens/loading_screen.dart';
@@ -43,6 +44,16 @@ class AppDrawerWidget extends ConsumerWidget {
               ),
               onTap: () {
                 Navigator.pushReplacementNamed(context, MainScreen.id);
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Food Calories',
+                style: TextStyle(fontSize: 40),
+              ),
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                    context, FoodDictionaryScreen.id);
               },
             ),
             ElevatedButton(

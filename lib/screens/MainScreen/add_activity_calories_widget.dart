@@ -1,3 +1,4 @@
+import 'package:bulk_n_burn/screens/FoodDictionaryScreen/food_dictionary_screen.dart';
 import 'package:flutter/material.dart';
 
 class AddActivityCaloriesWidget extends StatelessWidget {
@@ -33,10 +34,11 @@ class AddActivityCaloriesWidget extends StatelessWidget {
                     onPress: () {
                       //todo: add enter food/activity functionality
                     },
-                    text: "Enter food/activity"),
+                    text: "Enter activity"),
                 CustomTextButtonWithBorder(
                     onPress: () {
-                      //todo:add enter calories button
+                      Navigator.pushReplacementNamed(
+                          context, FoodDictionaryScreen.id);
                     },
                     text: "Enter Calories")
               ],

@@ -1,6 +1,7 @@
 import 'package:bulk_n_burn/constants.dart';
 import 'package:bulk_n_burn/providers/firebase_providers.dart';
 import 'package:bulk_n_burn/screens/FirstLoginScreen/first_login_screen.dart';
+import 'package:bulk_n_burn/screens/FoodDictionaryScreen/food_dictionary_screen.dart';
 import 'package:bulk_n_burn/screens/LoginScreen/login_account_screen.dart';
 import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
 import 'package:bulk_n_burn/screens/UserProfileScreen/user_profile_screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends ConsumerWidget {
         LoginScreen.id: (ctx) => LoginScreen(),
         MainScreen.id: (ctx) => MainScreen(),
         UserProfileScreen.id: (ctx) => UserProfileScreen(),
+        FoodDictionaryScreen.id: (ctx) => FoodDictionaryScreen(),
       },
     );
   }
