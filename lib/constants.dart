@@ -7,7 +7,9 @@ final kConsInputDec = InputDecoration(
     hintText: "Email",
     hintStyle: TextStyle(color: Colors.white),
     border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(18.0), borderSide: BorderSide.none),
+      borderRadius: BorderRadius.circular(18.0),
+      borderSide: BorderSide.none,
+    ),
     fillColor: Colors.white.withOpacity(0.4),
     filled: true,
     prefixIcon: const Icon(Icons.person));

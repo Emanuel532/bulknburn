@@ -26,7 +26,6 @@ dependencies:
   dartz: ^0.10.1
   google_sign_in: ^6.2.1
   freezed_annotation: ^2.4.1
-  gsform: ^0.3.4
 
 dev_dependencies:
   flutter_test:

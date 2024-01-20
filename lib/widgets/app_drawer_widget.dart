@@ -1,15 +1,19 @@
+import 'package:bulk_n_burn/providers/auth_provider.dart';
+import 'package:bulk_n_burn/providers/firebase_providers.dart';
 import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
 import 'package:bulk_n_burn/screens/UserProfileScreen/user_profile_screen.dart';
+import 'package:bulk_n_burn/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bulk_n_burn/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AppDrawerWidget extends StatelessWidget {
+class AppDrawerWidget extends ConsumerWidget {
   const AppDrawerWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       child: Container(
         color: kContractColor,
@@ -40,6 +44,13 @@ class AppDrawerWidget extends StatelessWidget {
               onTap: () {
                 Navigator.pushReplacementNamed(context, MainScreen.id);
               },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                ref.read(authDataSourceProvider).logout();
+                Navigator.pushReplacementNamed(context, LoadingScreen.id);
+              },
+              child: Text('Disconnect'),
             ),
           ],
         ),

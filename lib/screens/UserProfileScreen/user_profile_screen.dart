@@ -21,6 +21,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   String gender = "";
   String email = "";
   String fullname = "";
+  DateTime birthDay = DateTime.now();
   String height = "";
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         email = values['email'];
         fullname = values['full_name'];
         height = values['height'];
+        birthDay = values['birth_day']!.toDate();
         setState(() {});
       }
     });
@@ -86,6 +88,17 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                     children: [
                       Text('Age', style: kTextInfoStyle),
                       Text(age, style: kTextInfoStyle),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Birthday', style: kTextInfoStyle),
+                      Text("${birthDay.day}-${birthDay.month}-${birthDay.year}",
+                          style: kTextInfoStyle.copyWith(fontSize: 25)),
                     ],
                   ),
                   SizedBox(

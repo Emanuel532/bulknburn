@@ -68,18 +68,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       iconColor: Colors.orangeAccent),
                 ],
               )
-              /*ElevatedButton(
-                onPressed: () {
-                  print(ref.read(firebaseAuthProvider).currentUser);
-                },
-                child: Text('c'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(authNotifierProvider.notifier).logout();
-                },
-                child: Text('disc'),
-              ),*/
             ],
           ),
         ),
