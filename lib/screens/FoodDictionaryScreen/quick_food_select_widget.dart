@@ -20,7 +20,7 @@ class _QuickFoodSelectWidgetState extends ConsumerState<QuickFoodSelectWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 350,
+        height: 250,
         width: 350,
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

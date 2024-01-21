@@ -65,8 +65,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       iconColor: Colors.red),
                   RoundIconButtonWidget(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, FoodDictionaryScreen.id);
+                        Navigator.pushNamed(context, FoodDictionaryScreen.id);
                       },
                       icon: Icons.fastfood,
                       iconColor: Colors.orangeAccent),

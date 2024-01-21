@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:bulk_n_burn/providers/authentication_provider.dart';
 import 'package:bulk_n_burn/widgets/MainAppBar.dart';
 import 'package:bulk_n_burn/screens/MainScreen/circle_calories_display_widget.dart';
+import 'package:intl/intl.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class FoodDictionaryScreen extends ConsumerStatefulWidget {
   const FoodDictionaryScreen({super.key});
@@ -27,29 +29,44 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
     super.initState();
   }
 
+  int _currentFoodQuantity = 100;
+
   @override
   Widget build(BuildContext context) {
     final foodListener = ref.watch(foodController);
     return Scaffold(
       drawer: AppDrawerWidget(),
-      appBar: MainAppBar(),
+      appBar: MainAppBar(titleText: "Food🍕"),
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
           height: MediaQuery.of(context).size.height,
           color: kBackgroundColor,
-          child: Column(
+          child: ListView(
             children: [
-              Center(
-                child: Text(
-                  "Food🍕",
-                  style: kHeadlineTextStyle,
-                ),
-              ),
               SizedBox(
                 height: 30,
               ),
               QuickFoodSelectWidget(),
+              Container(
+                //todo: on doubleTap input desired quantity popup
+                child: NumberPicker(
+                  textStyle: TextStyle(color: Colors.white, fontSize: 30),
+                  selectedTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold),
+                  axis: Axis.horizontal,
+                  value: _currentFoodQuantity,
+                  minValue: 10,
+                  maxValue: 1000,
+                  onChanged: (value) =>
+                      setState(() => _currentFoodQuantity = value),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -68,11 +85,15 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                     children: [
                       Text(
                         foodListener.getName,
-                        style: TextStyle(fontSize: 30, color: Colors.white),
+                        style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       Text(
-                        "${foodListener.getCalories} calories",
-                        style: TextStyle(fontSize: 30, color: Colors.white),
+                        "$_currentFoodQuantity grams",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
+                      Text(
+                        "${foodListener.getCalories * 0.01 * _currentFoodQuantity} calories",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                     ],
                   )
@@ -81,8 +102,22 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
               SizedBox(
                 height: 25,
               ),
-              //todo:add to counter function
-              OrangeSquareButton(),
+              OrangeSquareButton(
+                text: 'Add to cal counter',
+                onPressed: () {
+                  String? uid = ref.read(firebaseAuthProvider).currentUser?.uid;
+                  var now = DateTime.now();
+                  var formatter = DateFormat('yyyy-MM-dd');
+                  String formattedDate = formatter.format(now);
+                  print(formattedDate); // 2016-01-25
+                  ref
+                      .read(firebaseFirestoreProvider)
+                      .doc('consumed_food/${ref.read(foodController).fd.name}')
+                      .set({
+                    'email': 'just_test',
+                  });
+                },
+              ),
             ],
           ),
         ),
@@ -93,13 +128,19 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
 
 class OrangeSquareButton extends StatelessWidget {
   const OrangeSquareButton({
-    super.key,
+    required this.text,
+    required this.onPressed,
   });
+
+  final String text;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        onPressed();
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.orange,

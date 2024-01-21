@@ -37,8 +37,7 @@ class AddActivityCaloriesWidget extends StatelessWidget {
                     text: "Enter activity"),
                 CustomTextButtonWithBorder(
                     onPress: () {
-                      Navigator.pushReplacementNamed(
-                          context, FoodDictionaryScreen.id);
+                      Navigator.pushNamed(context, FoodDictionaryScreen.id);
                     },
                     text: "Enter Calories")
               ],
