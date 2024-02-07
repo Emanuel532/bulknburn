@@ -16,25 +16,29 @@ class NewAccountScreen extends StatelessWidget {
           color: kBackgroundColor,
           padding: EdgeInsets.symmetric(
             horizontal: 15,
-            vertical: 35,
+            vertical: 20,
           ),
-          child: Column(
+          child: ListView(
             children: [
-              SizedBox(
-                height: 50,
+              Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    'Bulk & Burn',
+                    style: kHeadlineTextStyle,
+                  ),
+                  Text(
+                    'Sign Up',
+                    style: kHeadlineTextStyle.copyWith(fontSize: 35),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  SignUpWidget(),
+                ],
               ),
-              Text(
-                'Bulk & Burn',
-                style: kHeadlineTextStyle,
-              ),
-              Text(
-                'Sign Up',
-                style: kHeadlineTextStyle.copyWith(fontSize: 35),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              SignUpWidget(),
             ],
           ),
         ),

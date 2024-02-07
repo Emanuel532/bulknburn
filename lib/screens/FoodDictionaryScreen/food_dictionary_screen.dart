@@ -1,8 +1,11 @@
+import 'package:bulk_n_burn/models/DateModel.dart';
+import 'package:bulk_n_burn/providers/ConsumedCalories.dart';
 import 'package:bulk_n_burn/providers/food_selected_provider.dart';
 import 'package:bulk_n_burn/screens/FoodDictionaryScreen/quick_food_select_widget.dart';
 import 'package:bulk_n_burn/screens/MainScreen/add_activity_calories_widget.dart';
 import 'package:bulk_n_burn/widgets/RoundIconButtonWidget.dart';
 import 'package:bulk_n_burn/widgets/app_drawer_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bulk_n_burn/constants.dart';
 import 'package:bulk_n_burn/providers/firebase_providers.dart';
@@ -48,6 +51,7 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                 height: 30,
               ),
               QuickFoodSelectWidget(),
+              //todo: add search bar for diff dishes
               Container(
                 //todo: on doubleTap input desired quantity popup
                 child: NumberPicker(
@@ -88,11 +92,15 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                         style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       Text(
-                        "$_currentFoodQuantity grams",
+                        foodListener.getIsFoodSelected
+                            ? "$_currentFoodQuantity grams"
+                            : "Choose a meal!",
                         style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       Text(
-                        "${foodListener.getCalories * 0.01 * _currentFoodQuantity} calories",
+                        foodListener.getIsFoodSelected
+                            ? "${(foodListener.getCalories * 0.01 * _currentFoodQuantity).toInt()} calories"
+                            : "",
                         style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                     ],
@@ -103,19 +111,68 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                 height: 25,
               ),
               OrangeSquareButton(
-                text: 'Add to cal counter',
-                onPressed: () {
-                  String? uid = ref.read(firebaseAuthProvider).currentUser?.uid;
-                  var now = DateTime.now();
-                  var formatter = DateFormat('yyyy-MM-dd');
-                  String formattedDate = formatter.format(now);
-                  print(formattedDate); // 2016-01-25
-                  ref
-                      .read(firebaseFirestoreProvider)
-                      .doc('consumed_food/${ref.read(foodController).fd.name}')
-                      .set({
-                    'email': 'just_test',
-                  });
+                text: 'Add to counter',
+                onPressed: () async {
+                  //todo:refactor in a function
+                  if (foodListener.getName != "") {
+                    //check if there is any dish selected
+                    String? uid =
+                        ref.read(firebaseAuthProvider).currentUser?.uid;
+                    int curentCalories = 0;
+                    ref.read(consumedCaloriesController).setCalories(0);
+                    await ref
+                        .read(firebaseFirestoreProvider)
+                        .collection('consumed_food')
+                        .doc(uid!)
+                        .collection(DateModel.getCurrentDate().toString())
+                        .doc('Calories')
+                        .get()
+                        .then((snapShot) {
+                      Map<dynamic, dynamic>? values = snapShot.data();
+                      if (values != null) {
+                        //checking todays calories
+                        curentCalories = values['calories'].toInt();
+                        ref
+                            .read(consumedCaloriesController)
+                            .setCalories(values['calories'].toInt());
+                      }
+                    });
+
+                    String formattedCurrentDate = DateModel.getCurrentDate();
+
+                    ref
+                        .read(firebaseFirestoreProvider)
+                        .collection('consumed_food')
+                        .doc(uid!)
+                        .collection(formattedCurrentDate)
+                        .doc(DateTime.now().millisecondsSinceEpoch.toString())
+                        .set({
+                      'name': foodListener.fd.name,
+                      'calories': (foodListener.getCalories *
+                              0.01 *
+                              _currentFoodQuantity)
+                          .toInt(),
+                      'grams': _currentFoodQuantity,
+                      'time_stamp': DateTime.now().millisecondsSinceEpoch,
+                    }, SetOptions(merge: true));
+                    ref
+                        .read(firebaseFirestoreProvider)
+                        .collection('consumed_food')
+                        .doc(uid!)
+                        .collection(formattedCurrentDate)
+                        .doc('Calories')
+                        .set({
+                      'calories': curentCalories +
+                          foodListener.getCalories * 0.01 * _currentFoodQuantity
+                    });
+                    ref.read(consumedCaloriesController).addCalories(
+                        (foodListener.getCalories * 0.01 * _currentFoodQuantity)
+                            .toInt());
+                    Navigator.pop(context);
+                    showSuccesSnackBar(context, foodListener.fd.name, true);
+                  } else {
+                    showSuccesSnackBar(context, foodListener.fd.name, false);
+                  }
                 },
               ),
             ],
@@ -154,4 +211,15 @@ class OrangeSquareButton extends StatelessWidget {
       ),
     );
   }
+}
+
+void showSuccesSnackBar(BuildContext context, String foodName, bool succes) {
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  final snackBar = SnackBar(
+    content: succes
+        ? Text('Your $foodName meal was added succesfully!')
+        : Text("Please provide a meal!"),
+  );
+
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

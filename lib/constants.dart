@@ -15,7 +15,7 @@ final kConsInputDec = InputDecoration(
     prefixIcon: const Icon(Icons.person));
 const kHeadlineTextStyle = TextStyle(
     color: Colors.white,
-    fontSize: 55,
+    fontSize: 50,
     fontWeight: FontWeight.bold,
     fontFamily: 'Inter');
 

@@ -22,20 +22,25 @@ class _QuickFoodSelectWidgetState extends ConsumerState<QuickFoodSelectWidget> {
     return Container(
         height: 250,
         width: 350,
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, mainAxisSpacing: 15, crossAxisSpacing: 15),
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return ImgBox(
-              borderColorat: index == ref.watch(foodController).fd.index,
-              onTap: changeSelectedIndex,
-              index: index,
-              image: NetworkImage(dishList[index].imageLink),
-            );
-          },
-        ));
+        child: ListView(children: [
+          Container(
+            height: 350,
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, mainAxisSpacing: 15, crossAxisSpacing: 15),
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 9,
+              itemBuilder: (context, index) {
+                return ImgBox(
+                  borderColorat: index == ref.watch(foodController).fd.index,
+                  onTap: changeSelectedIndex,
+                  index: index,
+                  image: NetworkImage(dishList[index].imageLink),
+                );
+              },
+            ),
+          ),
+        ]));
   }
 }
 
