@@ -20,13 +20,13 @@ class RoundIconButtonWidget extends StatelessWidget {
       },
       elevation: 2.0,
       fillColor: Colors.white60,
+      padding: const EdgeInsets.all(15.0),
+      shape: const CircleBorder(),
       child: Icon(
         icon,
         size: 43.0,
         color: iconColor,
       ),
-      padding: EdgeInsets.all(15.0),
-      shape: CircleBorder(),
     );
   }
 }

@@ -35,7 +35,7 @@ class AuthDataSource {
 
   Future<Either<String, String>> getUid() async {
     try {
-      final response = await _firebaseAuth.currentUser?.uid;
+      final response = _firebaseAuth.currentUser?.uid;
       return right(response!);
     } on FirebaseAuthException catch (e) {
       return left(e.message ?? 'Failed to get UID');
@@ -46,7 +46,7 @@ class AuthDataSource {
     try {
       final response = await _firebaseAuth.signOut();
       return left("Logout succesful");
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       return right("Logout failed");
     }
   }

@@ -1,13 +1,11 @@
 import 'package:bulk_n_burn/screens/FoodDictionaryScreen/food_dictionary_screen.dart';
+import 'package:bulk_n_burn/screens/Calendar/calendar_screen.dart';
 import 'package:bulk_n_burn/screens/MainScreen/add_activity_calories_widget.dart';
 import 'package:bulk_n_burn/widgets/RoundIconButtonWidget.dart';
 import 'package:bulk_n_burn/widgets/app_drawer_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bulk_n_burn/constants.dart';
-import 'package:bulk_n_burn/providers/firebase_providers.dart';
-import 'package:bulk_n_burn/screens/FirstLoginScreen/first_login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:bulk_n_burn/providers/authentication_provider.dart';
 import 'package:bulk_n_burn/widgets/MainAppBar.dart';
 import 'package:bulk_n_burn/screens/MainScreen/circle_calories_display_widget.dart';
 
@@ -29,31 +27,33 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AppDrawerWidget(),
-      appBar: MainAppBar(),
+      drawer: const AppDrawerWidget(),
+      appBar: const MainAppBar(),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
           height: MediaQuery.of(context).size.height,
           color: kBackgroundColor,
           child: Column(
             children: [
-              Center(
+              const Center(
                 child: Text(
                   "Bulk & Burn",
                   style: kHeadlineTextStyle,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              CircleCaloriesDisplay(),
-              SizedBox(
+              const CircleCaloriesDisplay(),
+              const SizedBox(
                 height: 30,
               ),
-              AddActivityCaloriesWidget(),
+              const AddActivityCaloriesWidget(),
               RoundIconButtonWidget(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, CalendarScreen.id);
+                  },
                   icon: Icons.calendar_month,
                   iconColor: Colors.blueAccent),
               Row(

@@ -1,7 +1,6 @@
 import 'package:bulk_n_burn/auth/auth_data_source.dart';
 import 'package:bulk_n_burn/providers/state/authentication_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'auth_provider.dart';
 import 'firebase_providers.dart';
 
 class AuthNotifier extends StateNotifier<AuthenticationState> {

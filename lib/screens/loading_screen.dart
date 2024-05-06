@@ -7,6 +7,8 @@ import 'package:sign_in_button/sign_in_button.dart';
 
 class LoadingScreen extends StatelessWidget {
   static const String id = 'loading-screen';
+
+  const LoadingScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,17 +16,17 @@ class LoadingScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           color: kBackgroundColor,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 35,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
-              Text(
+              const Text(
                 'Bulk & Burn',
                 textAlign: TextAlign.center,
                 style: kHeadlineTextStyle,
@@ -34,7 +36,7 @@ class LoadingScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: kHeadlineTextStyle.copyWith(fontSize: 35),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               CustomElevatedButton(
@@ -44,7 +46,7 @@ class LoadingScreen extends StatelessWidget {
                   Navigator.pushNamed(context, LoginScreen.id);
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               CustomElevatedButton(
@@ -54,7 +56,7 @@ class LoadingScreen extends StatelessWidget {
                   Navigator.pushNamed(context, NewAccountScreen.id);
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ), //todo: google log in option
               SignInButton(

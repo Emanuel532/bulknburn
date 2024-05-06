@@ -9,7 +9,7 @@ class AddActivityCaloriesWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Add Activity For Today:',
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
@@ -21,7 +21,7 @@ class AddActivityCaloriesWidget extends StatelessWidget {
                   border: Border.all(color: Colors.black, width: 8)),
               child: IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   color: Colors.black,
                   size: 70,
@@ -44,7 +44,7 @@ class AddActivityCaloriesWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
       ],
@@ -71,10 +71,10 @@ class CustomTextButtonWithBorder extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 2),
         ),
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Text(
           text,
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          style: const TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
     );

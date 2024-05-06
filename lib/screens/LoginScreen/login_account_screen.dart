@@ -19,16 +19,16 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           width: double.infinity,
           color: kBackgroundColor,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 35,
           ),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
-              Text(
+              const Text(
                 'Bulk & Burn',
                 style: kHeadlineTextStyle,
               ),
@@ -36,10 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Log in',
                 style: kHeadlineTextStyle.copyWith(fontSize: 35),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              LogInWidget(),
+              const LogInWidget(),
             ],
           ),
         ),

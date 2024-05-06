@@ -1,8 +1,5 @@
-import 'package:bulk_n_burn/models/UserApp.dart';
 import 'package:bulk_n_burn/providers/firebase_providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz_unsafe.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userAppSnapshotProvider =

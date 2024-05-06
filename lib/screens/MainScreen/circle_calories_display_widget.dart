@@ -52,10 +52,10 @@ class CircleCaloriesDisplay extends ConsumerWidget {
             '+${NumberFormat.decimalPattern('en_US').format(todaysCalories)}',
             style: kCalButStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text('Calories Today', style: kCalButStyle)
+          const Text('Calories Today', style: kCalButStyle)
         ],
       ),
     );

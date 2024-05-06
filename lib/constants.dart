@@ -5,7 +5,7 @@ const kContractColor = Color(0x5F4B8BFF);
 
 final kConsInputDec = InputDecoration(
     hintText: "Email",
-    hintStyle: TextStyle(color: Colors.white),
+    hintStyle: const TextStyle(color: Colors.white),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(18.0),
       borderSide: BorderSide.none,

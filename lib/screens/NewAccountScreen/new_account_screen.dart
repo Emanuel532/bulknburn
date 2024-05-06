@@ -14,7 +14,7 @@ class NewAccountScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           color: kBackgroundColor,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15,
             vertical: 20,
           ),
@@ -22,10 +22,10 @@ class NewAccountScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
-                  Text(
+                  const Text(
                     'Bulk & Burn',
                     style: kHeadlineTextStyle,
                   ),
@@ -33,10 +33,10 @@ class NewAccountScreen extends StatelessWidget {
                     'Sign Up',
                     style: kHeadlineTextStyle.copyWith(fontSize: 35),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  SignUpWidget(),
+                  const SignUpWidget(),
                 ],
               ),
             ],

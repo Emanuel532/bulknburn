@@ -1,5 +1,4 @@
 import 'package:bulk_n_burn/constants.dart';
-import 'package:bulk_n_burn/screens/FirstLoginScreen/first_login_screen.dart';
 import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +21,7 @@ class _SignUpWidgetState extends ConsumerState<LogInWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           onChanged: (val) {
             email = val;
           },
@@ -33,10 +32,10 @@ class _SignUpWidgetState extends ConsumerState<LogInWidget> {
           onChanged: (val) {
             password = val;
           },
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           decoration: kConsInputDec.copyWith(
             hintText: 'Password',
-            prefixIcon: Icon(Icons.lock),
+            prefixIcon: const Icon(Icons.lock),
           ),
           obscureText: true,
         ),

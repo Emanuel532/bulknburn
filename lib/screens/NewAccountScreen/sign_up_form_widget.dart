@@ -1,5 +1,4 @@
 import 'package:bulk_n_burn/screens/FirstLoginScreen/first_login_screen.dart';
-import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bulk_n_burn/providers/auth_provider.dart';
@@ -7,7 +6,7 @@ import 'package:bulk_n_burn/providers/firebase_providers.dart';
 
 final consInputDec = InputDecoration(
     hintText: "Email",
-    hintStyle: TextStyle(color: Colors.white),
+    hintStyle: const TextStyle(color: Colors.white),
     border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(18.0), borderSide: BorderSide.none),
     fillColor: Colors.white.withOpacity(0.4),
@@ -31,7 +30,7 @@ class _SignUpWidgetState extends ConsumerState<SignUpWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           onChanged: (val) {
             email = val;
           },
@@ -39,13 +38,13 @@ class _SignUpWidgetState extends ConsumerState<SignUpWidget> {
         ),
         const SizedBox(height: 10),
         TextField(
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           onChanged: (val) {
             password = val;
           },
           decoration: consInputDec.copyWith(
             hintText: 'Password',
-            prefixIcon: Icon(Icons.lock),
+            prefixIcon: const Icon(Icons.lock),
           ),
           obscureText: true,
         ),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class QuickFoodSelectWidget extends ConsumerStatefulWidget {
+  const QuickFoodSelectWidget({super.key});
+
   @override
   ConsumerState<QuickFoodSelectWidget> createState() =>
       _QuickFoodSelectWidgetState();
@@ -19,16 +21,16 @@ class _QuickFoodSelectWidgetState extends ConsumerState<QuickFoodSelectWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 250,
         width: 350,
         child: ListView(children: [
-          Container(
+          SizedBox(
             height: 350,
             child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, mainAxisSpacing: 15, crossAxisSpacing: 15),
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 9,
               itemBuilder: (context, index) {
                 return ImgBox(

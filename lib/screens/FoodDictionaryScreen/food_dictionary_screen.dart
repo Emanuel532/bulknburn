@@ -2,19 +2,13 @@ import 'package:bulk_n_burn/models/DateModel.dart';
 import 'package:bulk_n_burn/providers/ConsumedCalories.dart';
 import 'package:bulk_n_burn/providers/food_selected_provider.dart';
 import 'package:bulk_n_burn/screens/FoodDictionaryScreen/quick_food_select_widget.dart';
-import 'package:bulk_n_burn/screens/MainScreen/add_activity_calories_widget.dart';
-import 'package:bulk_n_burn/widgets/RoundIconButtonWidget.dart';
 import 'package:bulk_n_burn/widgets/app_drawer_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bulk_n_burn/constants.dart';
 import 'package:bulk_n_burn/providers/firebase_providers.dart';
-import 'package:bulk_n_burn/screens/FirstLoginScreen/first_login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:bulk_n_burn/providers/authentication_provider.dart';
 import 'package:bulk_n_burn/widgets/MainAppBar.dart';
-import 'package:bulk_n_burn/screens/MainScreen/circle_calories_display_widget.dart';
-import 'package:intl/intl.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class FoodDictionaryScreen extends ConsumerStatefulWidget {
@@ -38,25 +32,25 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
   Widget build(BuildContext context) {
     final foodListener = ref.watch(foodController);
     return Scaffold(
-      drawer: AppDrawerWidget(),
-      appBar: MainAppBar(titleText: "Food🍕"),
+      drawer: const AppDrawerWidget(),
+      appBar: const MainAppBar(titleText: "Food🍕"),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
           height: MediaQuery.of(context).size.height,
           color: kBackgroundColor,
           child: ListView(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              QuickFoodSelectWidget(),
+              const QuickFoodSelectWidget(),
               //todo: add search bar for diff dishes
               Container(
                 //todo: on doubleTap input desired quantity popup
                 child: NumberPicker(
-                  textStyle: TextStyle(color: Colors.white, fontSize: 30),
-                  selectedTextStyle: TextStyle(
+                  textStyle: const TextStyle(color: Colors.white, fontSize: 30),
+                  selectedTextStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 45,
                       fontWeight: FontWeight.bold),
@@ -68,7 +62,7 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                       setState(() => _currentFoodQuantity = value),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Row(
@@ -89,25 +83,25 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                     children: [
                       Text(
                         foodListener.getName,
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                        style: const TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       Text(
                         foodListener.getIsFoodSelected
                             ? "$_currentFoodQuantity grams"
                             : "Choose a meal!",
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                        style: const TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       Text(
                         foodListener.getIsFoodSelected
                             ? "${(foodListener.getCalories * 0.01 * _currentFoodQuantity).toInt()} calories"
                             : "",
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                        style: const TextStyle(fontSize: 25, color: Colors.white),
                       ),
                     ],
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               OrangeSquareButton(
@@ -143,7 +137,7 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                     ref
                         .read(firebaseFirestoreProvider)
                         .collection('consumed_food')
-                        .doc(uid!)
+                        .doc(uid)
                         .collection(formattedCurrentDate)
                         .doc(DateTime.now().millisecondsSinceEpoch.toString())
                         .set({
@@ -158,7 +152,7 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
                     ref
                         .read(firebaseFirestoreProvider)
                         .collection('consumed_food')
-                        .doc(uid!)
+                        .doc(uid)
                         .collection(formattedCurrentDate)
                         .doc('Calories')
                         .set({
@@ -184,7 +178,7 @@ class _FoodDictionaryScreenState extends ConsumerState<FoodDictionaryScreen> {
 }
 
 class OrangeSquareButton extends StatelessWidget {
-  const OrangeSquareButton({
+  const OrangeSquareButton({super.key, 
     required this.text,
     required this.onPressed,
   });
@@ -203,8 +197,8 @@ class OrangeSquareButton extends StatelessWidget {
           color: Colors.orange,
           border: Border.all(color: Colors.orange, width: 2),
         ),
-        padding: EdgeInsets.all(5),
-        child: Text(
+        padding: const EdgeInsets.all(5),
+        child: const Text(
           "Add to counter",
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
@@ -218,7 +212,7 @@ void showSuccesSnackBar(BuildContext context, String foodName, bool succes) {
   final snackBar = SnackBar(
     content: succes
         ? Text('Your $foodName meal was added succesfully!')
-        : Text("Please provide a meal!"),
+        : const Text("Please provide a meal!"),
   );
 
   ScaffoldMessenger.of(context).showSnackBar(snackBar);

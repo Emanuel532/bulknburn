@@ -1,12 +1,9 @@
 import 'package:bulk_n_burn/constants.dart';
-import 'package:bulk_n_burn/models/UserApp.dart';
 import 'package:bulk_n_burn/providers/firebase_providers.dart';
 import 'package:bulk_n_burn/screens/MainScreen/main_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:bulk_n_burn/providers/authentication_provider.dart';
 
 class FirstLoginScreen extends ConsumerStatefulWidget {
   const FirstLoginScreen({super.key});
@@ -51,21 +48,21 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
           height: MediaQuery.of(context).size.height,
           color: kBackgroundColor,
           child: ListView(
             children: [
-              Text(
+              const Text(
                 'Bulk & Burn',
                 style: kHeadlineTextStyle,
               ),
-              Text(
+              const Text(
                 textAlign: TextAlign.center,
                 'Let`s get to know each other...',
                 style: kNormalTextStyle,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextField(
@@ -74,13 +71,13 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                 onChanged: (val) {
                   fullname = val;
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: kConsInputDec.copyWith(
                   hintText: 'Full name',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextField(
@@ -89,13 +86,13 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                 onChanged: (val) {
                   gender = val;
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: kConsInputDec.copyWith(
                   hintText: 'Gender',
-                  prefixIcon: Icon(Icons.circle),
+                  prefixIcon: const Icon(Icons.circle),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextField(
@@ -104,28 +101,28 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                 onChanged: (val) {
                   height = val;
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: kConsInputDec.copyWith(
                   hintText: 'Height (cm)',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextField(
                 onChanged: (val) {
                   age = val;
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: kConsInputDec.copyWith(
                   hintText: 'Age',
-                  prefixIcon: Icon(Icons.lock_clock),
+                  prefixIcon: const Icon(Icons.lock_clock),
                 ),
                 scrollPadding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom + 20 * 4),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -165,7 +162,7 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               ElevatedButton(
@@ -201,7 +198,7 @@ class _FirstLoginScreenState extends ConsumerState<FirstLoginScreen> {
                     //TODO: validate fields
                     Navigator.pushReplacementNamed(context, MainScreen.id);
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Please fill in all fields!'),
                     ));
                   }

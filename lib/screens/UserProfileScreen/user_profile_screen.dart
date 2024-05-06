@@ -20,7 +20,7 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
-  final kTextInfoStyle = TextStyle(fontSize: 30, color: Colors.white);
+  final kTextInfoStyle = const TextStyle(fontSize: 30, color: Colors.white);
   String age = "";
   String gender = "";
   String email = "";
@@ -53,11 +53,11 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   Widget build(BuildContext context) {
     int todaysCalories = ref.watch(consumedCaloriesController).caloriesToday;
     return Scaffold(
-      drawer: AppDrawerWidget(),
-      appBar: MainAppBar(),
+      drawer: const AppDrawerWidget(),
+      appBar: const MainAppBar(),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           color: kBackgroundColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -89,7 +89,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                       Text(gender, style: kTextInfoStyle),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -99,7 +99,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                       Text(age, style: kTextInfoStyle),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -110,7 +110,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                           style: kTextInfoStyle.copyWith(fontSize: 25)),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -175,7 +175,7 @@ class _HistoryFoodListWidgetState extends State<HistoryFoodListWidget> {
 
           return Column(
             children: [
-              Text("Food History Today", style: kNormalTextStyle),
+              const Text("Food History Today", style: kNormalTextStyle),
               Container(
                 color: Colors.grey,
                 height: 320,
@@ -192,22 +192,22 @@ class _HistoryFoodListWidgetState extends State<HistoryFoodListWidget> {
                                 children: [
                                   Text(
                                     '${data['name']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 25),
                                   ),
                                   Text(
                                     '${data['grams']}g',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 25),
                                   ),
                                   Text(
                                     '${data['calories']} cal',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 25),
                                   ),
                                 ],
                               ))
-                            : Text('');
+                            : const Text('');
                       })
                       .toList()
                       .cast(),
